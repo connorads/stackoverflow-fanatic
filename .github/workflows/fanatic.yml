@@ -3,6 +3,7 @@ name: Become a Fanatic
 on:
   schedule:
     - cron: '50 23 * * *'
+  workflow_dispatch:
 
 jobs:
   fanatic:
