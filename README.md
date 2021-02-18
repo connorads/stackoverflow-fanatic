@@ -4,6 +4,8 @@ Earn Stack Overflow's Fanatic Badge in an automated fashion using GitHub Actions
 
 ## Instructions
 
+_This is a work in progress. Better instructions TBD ⏰ Below is a draft reminder for the author ..._
+
 1. Fork the repo?
 2. Set environment variables?
 3. Re-enable workflow?
