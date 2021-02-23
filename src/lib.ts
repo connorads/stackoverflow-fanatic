@@ -26,7 +26,7 @@ const screenshotElement = async (
   }
 };
 
-const createGitActivity = async (
+const generateFauxRepoActivity = async (
   branch = 'faux-activity-branch',
   filePath = 'faux-activity.txt'
 ) => {
@@ -46,4 +46,4 @@ const createGitActivity = async (
   console.log('Changes pushed to branch', branch);
 };
 
-export {maybeGetBadgeAwardedText, screenshotElement, createGitActivity};
+export {maybeGetBadgeAwardedText, screenshotElement, generateFauxRepoActivity};

@@ -4,7 +4,7 @@ import * as playwright from 'playwright';
 import * as env from 'env-var';
 
 import {
-  createGitActivity,
+  generateFauxRepoActivity,
   maybeGetBadgeAwardedText,
   screenshotElement,
 } from './lib';
@@ -62,7 +62,7 @@ import {
 
     // Create repo activity so that workflow doesn't become disabled
     // TODO only run on day 42
-    await createGitActivity();
+    await generateFauxRepoActivity();
   }
 
   await browser.close();
