@@ -2,7 +2,7 @@ name: Become a Fanatic
 
 on:
   schedule:
-    - cron: '50 23 * * *'
+    - cron: '0 1 * * *'
   workflow_dispatch:
   pull_request:
     branches: [master]
