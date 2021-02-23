@@ -1,8 +1,10 @@
 require('dotenv').config();
 
 import * as playwright from 'playwright';
-import {Octokit} from '@octokit/core';
 import * as env from 'env-var';
+import simpleGit from 'simple-git';
+import {promises as fs} from 'fs';
+
 import {maybeGetBadgeAwardedText, screenshotElement} from './lib';
 
 (async () => {
@@ -55,24 +57,26 @@ import {maybeGetBadgeAwardedText, screenshotElement} from './lib';
     );
     console.log('Progress:', text);
     await screenshotElement(page, progressSelector, 'progress.png');
-  } else {
-    // If user has Fanatic badge then disable the GitHub Action workflow
-    console.log('Fanatic awarded, disabling workflow');
-    const octokit = new Octokit({auth: process.env.GITHUB_TOKEN});
-    const [owner, repo] = env
-      .get('GITHUB_REPOSITORY')
-      .required()
-      .asString()
-      .split('/');
-    await octokit.request(
-      'PUT /repos/{owner}/{repo}/actions/workflows/{workflow_id}/disable',
-      {
-        owner,
-        repo,
-        workflow_id: env.get('GITHUB_ACTION').required().asInt(),
-      }
-    );
-    console.log('Workflow disabled');
+
+    // Create repo activity so that workflow doesn't become disabled
+    // TODO only run on day 42
+    const git = simpleGit();
+    console.log('configuring git');
+    git
+      .addConfig('user.name', 'Robot 🤖')
+      .addConfig(
+        'user.email',
+        '41898282+github-actions[bot]@users.noreply.github.com'
+      )
+      .checkoutBranch('activity-branch', 'origin');
+    console.log('creating file');
+    await fs.appendFile('activity.txt', new Date().toISOString());
+    console.log('committing file');
+    git
+      .add('activity.txt')
+      .commit('Creating some repo activity 🏃‍')
+      .push('origin', 'activity-branch', ['--force']);
+    console.log('pushed changes');
   }
 
   await browser.close();
