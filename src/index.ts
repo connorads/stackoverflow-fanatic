@@ -62,7 +62,7 @@ import {maybeGetBadgeAwardedText, screenshotElement} from './lib';
     // TODO only run on day 42
     const git = simpleGit();
     console.log('configuring git');
-    git
+    await git
       .addConfig('user.name', 'Robot 🤖')
       .addConfig(
         'user.email',
@@ -72,7 +72,7 @@ import {maybeGetBadgeAwardedText, screenshotElement} from './lib';
     console.log('creating file');
     await fs.appendFile('activity.txt', new Date().toISOString());
     console.log('committing file');
-    git
+    await git
       .add('activity.txt')
       .commit('Creating some repo activity 🏃‍')
       .push('origin', 'activity-branch', ['--force']);
