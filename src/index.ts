@@ -3,7 +3,7 @@ require('dotenv').config();
 import * as playwright from 'playwright';
 import {Octokit} from '@octokit/core';
 import * as env from 'env-var';
-import {maybeGetBadgeAwardedText} from './lib';
+import {maybeGetBadgeAwardedText, screenshotElement} from './lib';
 
 (async () => {
   const email = env.get('STACKOVERFLOW_EMAIL').required().asString();
@@ -36,14 +36,25 @@ import {maybeGetBadgeAwardedText} from './lib';
   console.log('url', page.url());
   const awarded = await maybeGetBadgeAwardedText(page);
   console.log('Fanatic awarded?', awarded || 'No');
+  await screenshotElement(page, '#mainbar', 'awarded.png');
 
-  // Take screenshot
-  const screenshotOptions = {path: 'fanatic.png'};
-  await page.screenshot(screenshotOptions);
-  console.log('Screenshot saved', screenshotOptions);
-
-  // If use has Fanatic badge then disable the GitHub Action workflow
-  if (awarded) {
+  if (!awarded) {
+    // If user does not have Fanatic badge yet capture Fanatic badge progress
+    await Promise.all([page.waitForNavigation(), page.click('.my-profile')]);
+    console.log('url', page.url());
+    await page.click('#badge-card-settings');
+    const progressSelector = '[data-badge-database-name="Fanatic"]';
+    await page.waitForSelector(progressSelector);
+    const text = await page.evaluate(
+      (selector: string) =>
+        document.querySelector(selector)?.querySelector('.s-badge--label')
+          ?.textContent,
+      progressSelector
+    );
+    console.log('Progress:', text);
+    await screenshotElement(page, progressSelector, 'progress.png');
+  } else {
+    // If user has Fanatic badge then disable the GitHub Action workflow
     console.log('Fanatic awarded, disabling workflow');
     const octokit = new Octokit({auth: process.env.GITHUB_TOKEN});
     const [owner, repo] = env
