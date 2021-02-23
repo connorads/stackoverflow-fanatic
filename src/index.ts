@@ -2,10 +2,12 @@ require('dotenv').config();
 
 import * as playwright from 'playwright';
 import * as env from 'env-var';
-import simpleGit from 'simple-git';
-import {promises as fs} from 'fs';
 
-import {maybeGetBadgeAwardedText, screenshotElement} from './lib';
+import {
+  createGitActivity,
+  maybeGetBadgeAwardedText,
+  screenshotElement,
+} from './lib';
 
 (async () => {
   const email = env.get('STACKOVERFLOW_EMAIL').required().asString();
@@ -60,23 +62,7 @@ import {maybeGetBadgeAwardedText, screenshotElement} from './lib';
 
     // Create repo activity so that workflow doesn't become disabled
     // TODO only run on day 42
-    const git = simpleGit();
-    console.log('configuring git');
-    await git
-      .addConfig('user.name', 'Robot 🤖')
-      .addConfig(
-        'user.email',
-        '41898282+github-actions[bot]@users.noreply.github.com'
-      )
-      .checkoutLocalBranch('activity-branch');
-    console.log('creating file');
-    await fs.appendFile('activity.txt', new Date().toISOString());
-    console.log('committing file');
-    await git
-      .add('activity.txt')
-      .commit('Creating some repo activity 🏃‍')
-      .push('origin', 'activity-branch', ['--force']);
-    console.log('pushed changes');
+    await createGitActivity();
   }
 
   await browser.close();
