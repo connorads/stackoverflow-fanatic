@@ -9,7 +9,7 @@ import {maybeGetBadgeAwardedText, screenshotElement} from './lib';
   const email = env.get('STACKOVERFLOW_EMAIL').required().asString();
   const password = env.get('STACKOVERFLOW_PASSWORD').required().asString();
 
-  const browser = await playwright['chromium'].launch({headless: false});
+  const browser = await playwright['chromium'].launch();
   const page = await browser.newPage();
 
   // Login to Stack Overflow
