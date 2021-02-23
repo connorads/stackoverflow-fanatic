@@ -12,6 +12,8 @@ import {maybeGetBadgeAwardedText, screenshotElement} from './lib';
   const browser = await playwright['chromium'].launch();
   const page = await browser.newPage();
 
+  console.log('Become a Fanatic', {startTime: new Date().toISOString()});
+
   // Login to Stack Overflow
   await page.goto('https://stackoverflow.com/users/login');
   console.log('url', page.url());
