@@ -68,7 +68,7 @@ import {maybeGetBadgeAwardedText, screenshotElement} from './lib';
         'user.email',
         '41898282+github-actions[bot]@users.noreply.github.com'
       )
-      .checkoutBranch('activity-branch', 'origin');
+      .checkoutLocalBranch('activity-branch');
     console.log('creating file');
     await fs.appendFile('activity.txt', new Date().toISOString());
     console.log('committing file');
