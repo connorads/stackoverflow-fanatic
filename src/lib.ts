@@ -30,18 +30,21 @@ const generateFauxRepoActivity = async (
   branch = 'faux-activity-branch',
   filePath = 'faux-activity.txt'
 ) => {
-  const git = simpleGit();
-  console.log('Checkout branch', branch);
+  console.log('Configuring git');
+  const git = simpleGit()
+    .addConfig('user.name', 'Robot 🤖')
+    .addConfig(
+      'user.email',
+      '41898282+github-actions[bot]@users.noreply.github.com'
+    );
+  console.log('Checking out branch', branch);
   await git.checkoutLocalBranch(branch);
   console.log('Creating file', filePath);
   await fs.appendFile(filePath, new Date().toISOString());
   console.log('Committing and pushing file', filePath);
   await git
     .add(filePath)
-    .commit('Creating some repo activity 🏃‍', filePath, {
-      '--author':
-        '"Robot 🤖 <41898282+github-actions[bot]@users.noreply.github.com>"',
-    })
+    .commit('Creating some repo activity 🏃‍')
     .push('origin', branch, ['--force']);
   console.log('Changes pushed to branch', branch);
 };
