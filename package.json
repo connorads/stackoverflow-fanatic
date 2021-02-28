@@ -23,6 +23,7 @@
     "fix": "gts fix",
     "prepare": "npm run compile",
     "pretest": "npm run compile",
+    "prestart": "npm run compile",
     "posttest": "npm run lint"
   },
   "devDependencies": {
