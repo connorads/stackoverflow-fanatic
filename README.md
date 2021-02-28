@@ -1,6 +1,8 @@
 # Stack Overflow Fanatic
 
-Earn Stack Overflow's Fanatic Badge in an automated fashion using GitHub Actions 🏆
+Earn Stack Overflow's [Fanatic Badge](https://stackoverflow.com/help/badges/83/fanatic) automagically using GitHub Actions 🏆
+
+> Fanatic: Visit the site each day for 100 consecutive days. (Days are counted in UTC.).
 
 ## Instructions
 
