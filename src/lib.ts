@@ -47,7 +47,7 @@ const generateFauxRepoActivity = async (
   await git.checkoutLocalBranch(branch);
   console.log('Creating file', filePath);
   await fs.appendFile(filePath, new Date().toISOString());
-  console.log('Committing and pushing file', filePath);
+  console.log('Committing and force pushing file', filePath);
   await git
     .add(filePath)
     .commit('Creating some repo activity 🏃‍')
