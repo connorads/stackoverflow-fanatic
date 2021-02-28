@@ -43,9 +43,9 @@ Yes, but it was fun to make.
 
 No good reason of course.
 
-I accidentally earned the [Enthusiast Badge](https://stackoverflow.com/help/badges/71/enthusiast) for visiting Stack Overflow for 30 consecutive days (how sad 🤓).
+I accidentally earned the [Enthusiast Badge](https://stackoverflow.com/help/badges/71/enthusiast) for visiting Stack Overflow for 30 consecutive days (how sad 🤓)
 
-I then hoped to earn the Fanatic Badge but I decided to not do some coding for one day (unforgivable 🤦‍♂️) and lost my progress 😭
+I then hoped to earn the Fanatic Badge but I decided to not do any coding for one day (unforgivable 🤦‍♂️) and lost my progress 😭
 
 I found this [Meta Stack overflow question](https://meta.stackoverflow.com/questions/351223/is-it-allowed-to-make-a-simple-automatic-program-that-earns-you-the-fanatic-badg) on writing a program to earn the Fanatic Badge. Other people have done this before but they all required deploying to some infrastructure like Heroku or AWS. I asked myself _"Could this be done with GitHub Actions?"_ to which the answer seems to be _"Yes, technically"_.
 
