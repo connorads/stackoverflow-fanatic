@@ -29,8 +29,8 @@ And I would argue that this is low burden.
 
 There are other repos such as [upptime](https://github.com/upptime/upptime) acting in a serverless application manner of far greater burden that seem to not get into any trouble.
 
-### Why does it do this thing?
+### Won't GitHub disable the scheduled workflow after 60 days?
 
-To prevent the scheduled workflow from being [disabled automatically after 60 days of repository inactivity](https://docs.github.com/en/actions/managing-workflow-runs/disabling-and-enabling-a-workflow).
+To prevent the scheduled workflow from being [disabled automatically after 60 days of repository inactivity](https://docs.github.com/en/actions/managing-workflow-runs/disabling-and-enabling-a-workflow) the workflow will push some changes to the repo after [42](<https://simple.wikipedia.org/wiki/42_(answer)>) days. 60 days later GitHub will disable the workflow which will be after you've earned your Fanatic Badge on day 100.
 
 > Warning: To prevent unnecessary workflow runs, scheduled workflows may be disabled automatically. When a public repository is forked, scheduled workflows are disabled by default. In a public repository, scheduled workflows are automatically disabled when no repository activity has occurred in 60 days.

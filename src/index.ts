@@ -1,9 +1,13 @@
 require('dotenv').config();
 
 import * as playwright from 'playwright';
-import {Octokit} from '@octokit/core';
 import * as env from 'env-var';
-import {maybeGetBadgeAwardedText, screenshotElement} from './lib';
+
+import {
+  generateFauxRepoActivity,
+  maybeGetBadgeAwardedText,
+  screenshotElement,
+} from './lib';
 
 (async () => {
   const email = env.get('STACKOVERFLOW_EMAIL').required().asString();
@@ -55,24 +59,11 @@ import {maybeGetBadgeAwardedText, screenshotElement} from './lib';
     );
     console.log('Progress:', text);
     await screenshotElement(page, progressSelector, 'progress.png');
-  } else {
-    // If user has Fanatic badge then disable the GitHub Action workflow
-    console.log('Fanatic awarded, disabling workflow');
-    const octokit = new Octokit({auth: process.env.GITHUB_TOKEN});
-    const [owner, repo] = env
-      .get('GITHUB_REPOSITORY')
-      .required()
-      .asString()
-      .split('/');
-    await octokit.request(
-      'PUT /repos/{owner}/{repo}/actions/workflows/{workflow_id}/disable',
-      {
-        owner,
-        repo,
-        workflow_id: env.get('GITHUB_ACTION').required().asInt(),
-      }
-    );
-    console.log('Workflow disabled');
+
+    // Create repo activity so that workflow doesn't get disabled before 100 days
+    if (!text) throw new Error('Progress text is falsy');
+    const dayProgress = parseInt(text.slice(10).split('/')[0]);
+    if (dayProgress === 42) await generateFauxRepoActivity();
   }
 
   await browser.close();
