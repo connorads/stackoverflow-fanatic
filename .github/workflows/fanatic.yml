@@ -15,12 +15,14 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '14'
-      - run: npm ci
-      - run: npm start
+      - name: Install dependencies
+        run: npm ci
+      - name: Login to Stack Overflow
+        run: npm start
         env:
           STACKOVERFLOW_EMAIL: ${{ secrets.STACKOVERFLOW_EMAIL }}
           STACKOVERFLOW_PASSWORD: ${{ secrets.STACKOVERFLOW_PASSWORD }}
-      - name: Upload screenshot
+      - name: Upload screenshots
         uses: actions/upload-artifact@v2
         with:
           name: screenshots
