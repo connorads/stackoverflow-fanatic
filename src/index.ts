@@ -60,9 +60,10 @@ import {
     console.log('Progress:', text);
     await screenshotElement(page, progressSelector, 'progress.png');
 
-    // Create repo activity so that workflow doesn't become disabled
-    // TODO only run on day 42
-    await generateFauxRepoActivity();
+    // Create repo activity so that workflow doesn't get disabled before 100 days
+    if (!text) throw new Error('Progress text is falsy');
+    const dayProgress = parseInt(text.slice(10).split('/')[0]);
+    if (dayProgress === 42) await generateFauxRepoActivity();
   }
 
   await browser.close();
