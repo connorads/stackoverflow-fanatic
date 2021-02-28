@@ -4,12 +4,31 @@ Earn Stack Overflow's Fanatic Badge in an automated fashion using GitHub Actions
 
 ## Instructions
 
-_This is a work in progress. Better instructions TBD ⏰ Below is a draft reminder for the author ..._
+### Prerequisites
 
-1. Fork the repo?
-2. Set environment variables?
-3. Re-enable workflow?
-4. TBC?
+You need to [set a password for Stack Overflow](https://meta.stackoverflow.com/questions/285427/how-do-i-change-password-of-my-account).
+
+### Setup
+
+1. ⭐ Star this repo (_Optional_ 💕)
+2. Click [here](https://github.com/connorads/stackoverflow-fanatic/generate) to create a public or private repo from this repo template
+3. Add your Stack Overflow login details to your repo's GitHub Actions Secrets
+   - [Settings > Secrets > New repository secret](/settings/secrets/actions/new)
+   - Add Stack Overflow email secret
+     - Name: `STACKOVERFLOW_EMAIL`
+     - Value: `your.email@address.com`
+   - Add Stack Overflow password secret
+     - Name: `STACKOVERFLOW_PASSWORD`
+     - Value: `uRst4cK0verfl0wPasswd`
+4. Manually run the [Fanatic workflow](/actions/workflows/fanatic.yml) _(Optional)_
+
+### Usage
+
+Once the setup has been completed then the workflow will run daily at 1am UTC, log into your Stack Overflow profile and record your Fanatic Badge progress.
+
+There shouldn't be a need to monitor the workflow but if you look at the workflow logs or artifacts (screenshots) you can see the progress.
+
+Sometime after you've earned the Fanatic Badge the scheduled workflow will stop running.
 
 ## FAQ
 
