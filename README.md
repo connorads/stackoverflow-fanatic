@@ -13,16 +13,13 @@ You need to [set a password for Stack Overflow](https://meta.stackoverflow.com/q
 ### Setup
 
 1. ⭐ Star this repo (_Optional_ 💕)
-2. Click [here](https://github.com/connorads/stackoverflow-fanatic/generate) to create a public or private repo from this repo template
-3. Add your Stack Overflow login details to your repo's GitHub Actions Secrets
-   - [Settings > Secrets > New repository secret](/settings/secrets/actions/new)
-   - Add Stack Overflow email secret
-     - Name: `STACKOVERFLOW_EMAIL`
-     - Value: `your.email@address.com`
-   - Add Stack Overflow password secret
-     - Name: `STACKOVERFLOW_PASSWORD`
-     - Value: `uRst4cK0verfl0wPasswd`
-4. Manually run the [Fanatic workflow](/actions/workflows/fanatic.yml) _(Optional)_
+2. Create a public or private repo from [this repo template](https://github.com/connorads/stackoverflow-fanatic/generate)
+3. Add your Stack Overflow credentials to your repo's GitHub Actions Secrets
+   - ⚙ Settings > Secrets > New repository secret
+     - `STACKOVERFLOW_EMAIL`
+     - `STACKOVERFLOW_PASSWORD`
+4. Manually run the "Become a Fanatic" workflow (_Optional_)
+   - ▶ Actions > Become a Fanatic > Run workflow
 
 ### Usage
 
