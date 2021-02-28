@@ -32,6 +32,26 @@ Sometime after you've earned the Fanatic Badge the scheduled workflow will stop 
 
 ## FAQ
 
+### Isn't this cheating to get something which is already a bit pointless?
+
+Yes, but it was fun to make.
+
+### But why?
+
+No good reason of course.
+
+I accidentally earned the [Enthusiast Badge](https://stackoverflow.com/help/badges/71/enthusiast) for visiting Stack Overflow for 30 consecutive days (how sad 🤓).
+
+I then hoped to earn the Fanatic Badge but I decided to not do some coding for one day (unforgivable 🤦‍♂️) and lost my progress 😭
+
+I found this [Meta Stack overflow question](https://meta.stackoverflow.com/questions/351223/is-it-allowed-to-make-a-simple-automatic-program-that-earns-you-the-fanatic-badg) on writing a program to earn the Fanatic Badge. Other people have done this before but they all required deploying to some infrastructure like Heroku or AWS. I asked myself _"Could this be done with GitHub Actions?"_ to which the answer seems to be _"Yes, technically"_.
+
+It was also a good excuse to give [Playwright](https://playwright.dev/) a go.
+
+### Can I get banned from Stack Overflow for this?
+
+[Probably not](https://meta.stackoverflow.com/a/351224/4319653).
+
 ### Isn't this against the GitHub Terms of Service?
 
 Maybe. Maybe not.
