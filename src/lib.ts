@@ -30,6 +30,7 @@ const generateFauxRepoActivity = async (
   branch = 'faux-activity-branch',
   filePath = 'faux-activity.txt'
 ) => {
+  console.log('Creating faux repo activity using git');
   const git = simpleGit();
   const config = await git.listConfig();
   if (!config.all['user.name'] || !config.all['user.email']) {
