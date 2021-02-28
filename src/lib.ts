@@ -30,13 +30,18 @@ const generateFauxRepoActivity = async (
   branch = 'faux-activity-branch',
   filePath = 'faux-activity.txt'
 ) => {
-  console.log('Configuring git');
-  const git = simpleGit()
-    .addConfig('user.name', 'Robot 🤖')
-    .addConfig(
-      'user.email',
-      '41898282+github-actions[bot]@users.noreply.github.com'
-    );
+  const git = simpleGit();
+  const config = await git.listConfig();
+  if (!config.all['user.name'] || !config.all['user.email']) {
+    console.log('Configuring git user');
+    git
+      .addConfig('user.name', 'GitHub Robot 🤖')
+      .addConfig(
+        'user.email',
+        '41898282+github-actions[bot]@users.noreply.github.com'
+      );
+  }
+
   console.log('Checking out branch', branch);
   await git.checkoutLocalBranch(branch);
   console.log('Creating file', filePath);
