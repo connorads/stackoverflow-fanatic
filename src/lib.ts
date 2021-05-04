@@ -1,5 +1,5 @@
 import * as playwright from 'playwright';
-import simpleGit from 'simple-git';
+import simpleGit, {ResetMode} from 'simple-git';
 import {promises as fs} from 'fs';
 
 const maybeGetBadgeAwardedText = (page: playwright.Page) =>
@@ -27,7 +27,7 @@ const screenshotElement = async (
 };
 
 const generateFauxRepoActivity = async (
-  branch = 'faux-activity-branch',
+  branch = 'master',
   filePath = 'faux-activity.txt'
 ) => {
   console.log('Creating faux repo activity using git');
@@ -42,15 +42,18 @@ const generateFauxRepoActivity = async (
         '41898282+github-actions[bot]@users.noreply.github.com'
       );
   }
-
   console.log('Checking out branch', branch);
-  await git.checkoutLocalBranch(branch);
+  await git.checkout(branch);
   console.log('Creating file', filePath);
   await fs.appendFile(filePath, new Date().toISOString());
-  console.log('Committing and force pushing file', filePath);
+  console.log('Committing and pushing file', filePath);
   await git
     .add(filePath)
     .commit('Creating some repo activity 🏃‍')
+    .push('origin', branch);
+  console.log('Hard resetting to HEAD~1 and force pushing');
+  await git
+    .reset(ResetMode.HARD, ['HEAD~1'])
     .push('origin', branch, ['--force']);
   console.log('Changes pushed to branch', branch);
 };
