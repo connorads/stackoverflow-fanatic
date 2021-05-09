@@ -13,11 +13,21 @@ import {
   const email = env.get('STACKOVERFLOW_EMAIL').required().asString();
   const password = env.get('STACKOVERFLOW_PASSWORD').required().asString();
 
+  const urlConfig = env.get('ALTERNATIVE_URL').asUrlString();
+  const badgeConfig = env.get('ALTERNATIVE_FANATIC_BADGENO').asInt();
+  if (urlConfig && !badgeConfig)
+    throw Error('You must also set ALTERNATIVE_FANATIC_BADGENO');
+  if (!urlConfig && badgeConfig)
+    throw Error('You must also set ALTERNATIVE_URL');
+
+  const url = urlConfig || 'https://stackoverflow.com/';
+  const fanaticBadgeNo = badgeConfig || 83;
+
   const browser = await playwright['chromium'].launch();
   const page = await browser.newPage();
 
-  console.log('Login to Stack Overflow');
-  await page.goto('https://stackoverflow.com/users/login');
+  console.log(`Login to ${url}`);
+  await page.goto(`${url}users/login`);
   console.log('url', page.url());
   await page.waitForSelector('#email');
   await page.type('#email', email);
@@ -33,7 +43,7 @@ import {
   const userid = page.url().split('/')[4];
   console.log('userid', userid);
   await page.goto(
-    `https://stackoverflow.com/help/badges/83/fanatic?userid=${userid}`
+    `${url}help/badges/${fanaticBadgeNo}/fanatic?userid=${userid}`
   );
 
   console.log('Has the user been awarded the Fanatic badge yet?');
