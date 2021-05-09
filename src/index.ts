@@ -5,6 +5,7 @@ import * as env from 'env-var';
 
 import {
   generateFauxRepoActivity,
+  getBadgeNumber,
   maybeGetBadgeAwardedText,
   screenshotElement,
 } from './lib';
@@ -13,18 +14,13 @@ import {
   const email = env.get('STACKOVERFLOW_EMAIL').required().asString();
   const password = env.get('STACKOVERFLOW_PASSWORD').required().asString();
 
-  const urlConfig = env.get('ALTERNATIVE_URL').asUrlString();
-  const badgeConfig = env.get('ALTERNATIVE_FANATIC_BADGENO').asInt();
-  if (urlConfig && !badgeConfig)
-    throw Error('You must also set ALTERNATIVE_FANATIC_BADGENO');
-  if (!urlConfig && badgeConfig)
-    throw Error('You must also set ALTERNATIVE_URL');
-
-  const url = urlConfig || 'https://stackoverflow.com/';
-  const fanaticBadgeNo = badgeConfig || 83;
+  const url =
+    env.get('ALTERNATIVE_URL').asUrlString() || 'https://stackoverflow.com/';
 
   const browser = await playwright['chromium'].launch();
   const page = await browser.newPage();
+
+  const badgeNo = await getBadgeNumber(page, url);
 
   console.log(`Login to ${url}`);
   await page.goto(`${url}users/login`);
@@ -42,9 +38,7 @@ import {
   console.log('url', page.url());
   const userid = page.url().split('/')[4];
   console.log('userid', userid);
-  await page.goto(
-    `${url}help/badges/${fanaticBadgeNo}/fanatic?userid=${userid}`
-  );
+  await page.goto(`${url}help/badges/${badgeNo}/?userid=${userid}`);
 
   console.log('Has the user been awarded the Fanatic badge yet?');
   console.log('url', page.url());

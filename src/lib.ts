@@ -9,6 +9,23 @@ const maybeGetBadgeAwardedText = (page: playwright.Page) =>
       ?.textContent?.trim()
   );
 
+const getBadgeNumber = async (
+  page: playwright.Page,
+  url: string,
+  badge = 'fanatic',
+  log = console.log
+): Promise<number> => {
+  log('Go to badges page');
+  await page.goto(`${url}help/badges`);
+  log('url', page.url());
+  log(`Try to click badge: ${badge}`);
+  await Promise.all([page.waitForNavigation(), page.click(`text=${badge}`)]);
+  log('url', page.url());
+  const badgeNumber = parseInt(page.url().split('/')[5]);
+  log('Got badge number', [badge, badgeNumber]);
+  return badgeNumber;
+};
+
 const screenshotElement = async (
   page: playwright.Page,
   selector: string,
@@ -58,4 +75,9 @@ const generateFauxRepoActivity = async (
   console.log('Changes pushed to branch', branch);
 };
 
-export {maybeGetBadgeAwardedText, screenshotElement, generateFauxRepoActivity};
+export {
+  maybeGetBadgeAwardedText,
+  getBadgeNumber,
+  screenshotElement,
+  generateFauxRepoActivity,
+};

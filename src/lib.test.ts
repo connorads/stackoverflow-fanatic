@@ -1,5 +1,5 @@
-import {it, expect, describe} from '@playwright/test';
-import {maybeGetBadgeAwardedText} from './lib';
+import {it, expect, describe, beforeAll, afterAll} from '@playwright/test';
+import {getBadgeNumber, maybeGetBadgeAwardedText} from './lib';
 
 describe('maybeGetBadgeAwardedText', () => {
   it('returns badge awarded text if user has badge', async ({page}) => {
@@ -16,5 +16,28 @@ describe('maybeGetBadgeAwardedText', () => {
     );
     const awarded = await maybeGetBadgeAwardedText(page);
     expect(awarded).toBe(undefined);
+  });
+});
+
+describe('getBadgeNumber', () => {
+  const consoleLog = console.log;
+  beforeAll(async () => {
+    console.log = () => {};
+  });
+  afterAll(async () => {
+    console.log = consoleLog;
+  });
+
+  [
+    {url: 'https://stackoverflow.com/', badge: 'fanatic', number: 83},
+    {url: 'https://superuser.com/', badge: 'fanatic', number: 42},
+  ].forEach(({url, badge, number}) => {
+    it(`returns badge number ${number} for badge ${badge} on ${url}`, async ({
+      page,
+    }) => {
+      await page.goto(url);
+      const badgeNumber = await getBadgeNumber(page, url, badge);
+      expect(badgeNumber).toBe(number);
+    });
   });
 });
