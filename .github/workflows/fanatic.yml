@@ -17,11 +17,12 @@ jobs:
           node-version: '14'
       - name: Install dependencies
         run: npm ci
-      - name: Login to Stack Overflow
+      - name: Become a Fanatic
         run: npm start
         env:
           STACKOVERFLOW_EMAIL: ${{ secrets.STACKOVERFLOW_EMAIL }}
           STACKOVERFLOW_PASSWORD: ${{ secrets.STACKOVERFLOW_PASSWORD }}
+          ALTERNATIVE_URL: ${{ secrets.ALTERNATIVE_URL }}
       - name: Upload screenshots
         uses: actions/upload-artifact@v2
         with:
