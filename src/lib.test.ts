@@ -31,6 +31,7 @@ describe('getBadgeNumber', () => {
   [
     {url: 'https://stackoverflow.com/', badge: 'fanatic', number: 83},
     {url: 'https://superuser.com/', badge: 'fanatic', number: 42},
+    {url: 'https://serverfault.com/', badge: 'fanatic', number: 67},
   ].forEach(({url, badge, number}) => {
     it(`returns badge number ${number} for badge ${badge} on ${url}`, async ({
       page,
