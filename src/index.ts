@@ -5,6 +5,7 @@ import * as env from 'env-var';
 
 import {
   generateFauxRepoActivity,
+  getBadgeNumber,
   maybeGetBadgeAwardedText,
   screenshotElement,
 } from './lib';
@@ -13,11 +14,16 @@ import {
   const email = env.get('STACKOVERFLOW_EMAIL').required().asString();
   const password = env.get('STACKOVERFLOW_PASSWORD').required().asString();
 
+  const url =
+    env.get('ALTERNATIVE_URL').asUrlString() || 'https://stackoverflow.com/';
+
   const browser = await playwright['chromium'].launch();
   const page = await browser.newPage();
 
-  console.log('Login to Stack Overflow');
-  await page.goto('https://stackoverflow.com/users/login');
+  const badgeNo = await getBadgeNumber(page, url);
+
+  console.log(`Login to ${url}`);
+  await page.goto(`${url}users/login`);
   console.log('url', page.url());
   await page.waitForSelector('#email');
   await page.type('#email', email);
@@ -32,9 +38,7 @@ import {
   console.log('url', page.url());
   const userid = page.url().split('/')[4];
   console.log('userid', userid);
-  await page.goto(
-    `https://stackoverflow.com/help/badges/83/fanatic?userid=${userid}`
-  );
+  await page.goto(`${url}help/badges/${badgeNo}/?userid=${userid}`);
 
   console.log('Has the user been awarded the Fanatic badge yet?');
   console.log('url', page.url());

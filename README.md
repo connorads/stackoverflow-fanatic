@@ -8,6 +8,8 @@ Earn Stack Overflow's [Fanatic Badge](https://stackoverflow.com/help/badges/83/f
 
 > Fanatic: Visit the site each day for 100 consecutive days. (Days are counted in UTC.).
 
+_Not just for Stack Overflow. Should work with any StackExchange.com site that has a Fanatic Badge._
+
 ## Instructions
 
 ### Prerequisites
@@ -16,13 +18,14 @@ You need to [set a password for Stack Overflow](https://meta.stackoverflow.com/q
 
 ### Setup
 
-1. ⭐ Star this repo (_Optional_ 💕)
+1. (_Optional_ 💕) ⭐ Star this repo
 2. Create a public or private repo from [this repo template](https://github.com/connorads/stackoverflow-fanatic/generate)
 3. Add your Stack Overflow credentials to your repo's GitHub Actions Secrets
    - ⚙ Settings > Secrets > New repository secret
      - `STACKOVERFLOW_EMAIL`
      - `STACKOVERFLOW_PASSWORD`
-4. Manually run the "Become a Fanatic" workflow (_Optional_)
+     - (_Optional_) `ALTERNATIVE_URL` (e.g. `https://superuser.com` or `https://serverfault.com/`)
+4. (_Optional_) Manually run the "Become a Fanatic" workflow
    - ▶ Actions > Become a Fanatic > Run workflow
 
 ### Usage
