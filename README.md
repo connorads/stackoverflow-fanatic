@@ -8,6 +8,8 @@ Earn Stack Overflow's [Fanatic Badge](https://stackoverflow.com/help/badges/83/f
 
 > Fanatic: Visit the site each day for 100 consecutive days. (Days are counted in UTC.).
 
+_Not just for Stack Overflow. Should work with any StackExchange.com site that has a Fanatic Badge._
+
 ## Instructions
 
 ### Prerequisites
