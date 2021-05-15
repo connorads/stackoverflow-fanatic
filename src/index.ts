@@ -14,8 +14,10 @@ import {
   const email = env.get('STACKOVERFLOW_EMAIL').required().asString();
   const password = env.get('STACKOVERFLOW_PASSWORD').required().asString();
 
-  const url =
-    env.get('ALTERNATIVE_URL').asUrlString() || 'https://stackoverflow.com/';
+  const alternativeUrl = env.get('ALTERNATIVE_URL').asString()?.trim();
+  const url = alternativeUrl
+    ? new URL(alternativeUrl).toString()
+    : 'https://stackoverflow.com/';
 
   const browser = await playwright['chromium'].launch();
   const page = await browser.newPage();
