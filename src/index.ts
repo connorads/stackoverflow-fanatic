@@ -52,7 +52,7 @@ import {
     console.log('User does not have Fanatic badge yet so capture progress');
     await Promise.all([page.waitForNavigation(), page.click('.my-profile')]);
     console.log('url', page.url());
-    await page.click('#badge-card-settings');
+    await page.click('#js-select-badge');
     const progressSelector = '[data-badge-database-name="Fanatic"]';
     await page.waitForSelector(progressSelector);
     const text = await page.evaluate(
