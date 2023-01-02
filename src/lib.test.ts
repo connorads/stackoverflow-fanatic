@@ -7,7 +7,7 @@ describe('maybeGetBadgeAwardedText', () => {
       'https://stackoverflow.com/help/badges/71/enthusiast?userid=4319653'
     );
     const awarded = await maybeGetBadgeAwardedText(page);
-    expect(awarded).toBe('Awarded Jan 31 at 13:34');
+    expect(awarded).toBe('Awarded Jan 31, 2021 at 13:34');
   });
 
   it('returns undefined if user does not have badge', async ({page}) => {
