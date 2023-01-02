@@ -13,6 +13,7 @@ import {
 (async () => {
   const email = env.get('STACKOVERFLOW_EMAIL').required().asString();
   const password = env.get('STACKOVERFLOW_PASSWORD').required().asString();
+  console.log("password", password);
 
   const alternativeUrl = env.get('ALTERNATIVE_URL').asString()?.trim();
   const url = alternativeUrl
