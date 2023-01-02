@@ -34,7 +34,7 @@ import {
 
   console.log('Go to profile');
   console.log('url', page.url());
-  await Promise.all([page.waitForNavigation(), page.click('.my-profile')]);
+  await Promise.all([page.waitForNavigation(), page.click('.s-user-card')]);
 
   console.log("Go to user's Fanatic badge page");
   console.log('url', page.url());
@@ -50,9 +50,9 @@ import {
 
   if (!awarded) {
     console.log('User does not have Fanatic badge yet so capture progress');
-    await Promise.all([page.waitForNavigation(), page.click('.my-profile')]);
+    await Promise.all([page.waitForNavigation(), page.click('.s-user-card')]);
     console.log('url', page.url());
-    await page.click('#badge-card-settings');
+    await page.click('.js-select-badge-container');
     const progressSelector = '[data-badge-database-name="Fanatic"]';
     await page.waitForSelector(progressSelector);
     const text = await page.evaluate(
