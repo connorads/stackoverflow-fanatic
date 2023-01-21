@@ -21,7 +21,7 @@ You need to [set a password for Stack Overflow](https://meta.stackoverflow.com/q
 1. (_Optional_ 💕) ⭐ Star this repo
 2. Create a public or private repo from [this repo template](https://github.com/connorads/stackoverflow-fanatic/generate)
 3. Add your Stack Overflow credentials to your repo's GitHub Actions Secrets
-   - ⚙ Settings > Secrets > New repository secret
+   - ⚙ Settings > Secrets and variables > New repository secret
      - `STACKOVERFLOW_EMAIL`
      - `STACKOVERFLOW_PASSWORD`
      - (_Optional_) `ALTERNATIVE_URL` (e.g. `https://superuser.com` or `https://serverfault.com/`)
