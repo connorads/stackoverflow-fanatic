@@ -16,7 +16,9 @@ jobs:
         with:
           node-version: '20'
       - name: Install dependencies
-        run: npm ci && npx playwright install chromium
+        run: |
+          npm ci
+          npx playwright install --with-deps
       - name: Become a Fanatic
         run: npm start
         env:
