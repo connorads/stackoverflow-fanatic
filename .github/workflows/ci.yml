@@ -15,5 +15,5 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '20'
-      - run: npm ci && npx playwright install chrome
+      - run: npm ci && npx playwright install chromium
       - run: npm test
