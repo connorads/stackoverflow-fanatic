@@ -34,8 +34,8 @@ test.describe('getBadgeNumber', () => {
     {url: 'https://serverfault.com/', badge: 'fanatic', number: 67},
   ].forEach(({url, badge, number}) => {
     test(`returns badge number ${number} for badge ${badge} on ${url}`, async ({
-                                                                                 page,
-                                                                               }) => {
+      page,
+    }) => {
       await page.goto(url);
       const badgeNumber = await getBadgeNumber(page, url, badge);
       test.expect(badgeNumber).toBe(number);

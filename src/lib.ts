@@ -3,10 +3,11 @@ import simpleGit, {ResetMode} from 'simple-git';
 import {promises as fs} from 'fs';
 
 const maybeGetBadgeAwardedText = (page: playwright.Page) =>
-  page.evaluate(() =>
-    document
-      .getElementsByClassName('single-badge-awarded')[0]
-      ?.textContent?.trim()
+  page.evaluate(
+    () =>
+      document
+        .getElementsByClassName('single-badge-awarded')[0]
+        ?.textContent?.trim()
   );
 
 const getBadgeNumber = async (
