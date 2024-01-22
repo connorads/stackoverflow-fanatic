@@ -1,4 +1,4 @@
-import {test, expect} from '@playwright/test';
+import {test} from '@playwright/test';
 import {getBadgeNumber, maybeGetBadgeAwardedText} from './lib';
 
 test.describe('maybeGetBadgeAwardedText', () => {
@@ -7,7 +7,7 @@ test.describe('maybeGetBadgeAwardedText', () => {
       'https://stackoverflow.com/help/badges/71/enthusiast?userid=4319653'
     );
     const awarded = await maybeGetBadgeAwardedText(page);
-    expect(awarded).toBe('Awarded Jan 31, 2021 at 13:34');
+    test.expect(awarded).toBe('Awarded Jan 31, 2021 at 13:34');
   });
 
   test('returns undefined if user does not have badge', async ({page}) => {
@@ -15,7 +15,7 @@ test.describe('maybeGetBadgeAwardedText', () => {
       'https://stackoverflow.com/help/badges/146/legendary?userid=4319653'
     );
     const awarded = await maybeGetBadgeAwardedText(page);
-    expect(awarded).toBe(undefined);
+    test.expect(awarded).toBe(undefined);
   });
 });
 
@@ -38,7 +38,7 @@ test.describe('getBadgeNumber', () => {
                                                                                }) => {
       await page.goto(url);
       const badgeNumber = await getBadgeNumber(page, url, badge);
-      expect(badgeNumber).toBe(number);
+      test.expect(badgeNumber).toBe(number);
     });
   });
 });
