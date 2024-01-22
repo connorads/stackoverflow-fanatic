@@ -20,7 +20,10 @@ const getBadgeNumber = async (
   await page.goto(`${url}help/badges`);
   log('url', page.url());
   log(`Try to click badge: ${badge}`);
-  await Promise.all([page.waitForNavigation(), page.click(`text=${badge}`)]);
+  await Promise.all([
+    page.waitForURL('**/badges/*/fanatic'),
+    page.click(`text=${badge}`),
+  ]);
   log('url', page.url());
   const badgeNumber = parseInt(page.url().split('/')[5]);
   log('Got badge number', [badge, badgeNumber]);
