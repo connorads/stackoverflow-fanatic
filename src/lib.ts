@@ -3,10 +3,11 @@ import simpleGit, {ResetMode} from 'simple-git';
 import {promises as fs} from 'fs';
 
 const maybeGetBadgeAwardedText = (page: playwright.Page) =>
-  page.evaluate(() =>
-    document
-      .getElementsByClassName('single-badge-awarded')[0]
-      ?.textContent?.trim()
+  page.evaluate(
+    () =>
+      document
+        .getElementsByClassName('single-badge-awarded')[0]
+        ?.textContent?.trim()
   );
 
 const getBadgeNumber = async (
@@ -19,7 +20,10 @@ const getBadgeNumber = async (
   await page.goto(`${url}help/badges`);
   log('url', page.url());
   log(`Try to click badge: ${badge}`);
-  await Promise.all([page.waitForNavigation(), page.click(`text=${badge}`)]);
+  await Promise.all([
+    page.waitForURL('**/badges/*/fanatic'),
+    page.click(`text=${badge}`),
+  ]);
   log('url', page.url());
   const badgeNumber = parseInt(page.url().split('/')[5]);
   log('Got badge number', [badge, badgeNumber]);

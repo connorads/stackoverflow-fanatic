@@ -28,13 +28,16 @@ import {
   await page.goto(`${url}users/login`);
   console.log('url', page.url());
   await page.waitForSelector('#email');
-  await page.type('#email', email);
-  await page.type('#password', password);
-  await Promise.all([page.waitForNavigation(), page.click('#submit-button')]);
+  await page.fill('#email', email);
+  await page.fill('#password', password);
+  await Promise.all([page.waitForURL('**/'), page.click('#submit-button')]);
 
   console.log('Go to profile');
   console.log('url', page.url());
-  await Promise.all([page.waitForNavigation(), page.click('.s-user-card')]);
+  await Promise.all([
+    page.waitForURL('**/users/**'),
+    page.click('.s-user-card'),
+  ]);
 
   console.log("Go to user's Fanatic badge page");
   console.log('url', page.url());
@@ -50,7 +53,10 @@ import {
 
   if (!awarded) {
     console.log('User does not have Fanatic badge yet so capture progress');
-    await Promise.all([page.waitForNavigation(), page.click('.s-user-card')]);
+    await Promise.all([
+      page.waitForURL('**/users/**'),
+      page.click('.s-user-card'),
+    ]);
     console.log('url', page.url());
     await page.click('.js-select-badge-container');
     const progressSelector = '[data-badge-database-name="Fanatic"]';

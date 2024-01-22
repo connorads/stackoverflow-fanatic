@@ -1,30 +1,30 @@
-import {it, expect, describe, beforeAll, afterAll} from '@playwright/test';
+import {test} from '@playwright/test';
 import {getBadgeNumber, maybeGetBadgeAwardedText} from './lib';
 
-describe('maybeGetBadgeAwardedText', () => {
-  it('returns badge awarded text if user has badge', async ({page}) => {
+test.describe('maybeGetBadgeAwardedText', () => {
+  test('returns badge awarded text if user has badge', async ({page}) => {
     await page.goto(
       'https://stackoverflow.com/help/badges/71/enthusiast?userid=4319653'
     );
     const awarded = await maybeGetBadgeAwardedText(page);
-    expect(awarded).toBe('Awarded Jan 31, 2021 at 13:34');
+    test.expect(awarded).toBe('Awarded Jan 31, 2021 at 13:34');
   });
 
-  it('returns undefined if user does not have badge', async ({page}) => {
+  test('returns undefined if user does not have badge', async ({page}) => {
     await page.goto(
       'https://stackoverflow.com/help/badges/146/legendary?userid=4319653'
     );
     const awarded = await maybeGetBadgeAwardedText(page);
-    expect(awarded).toBe(undefined);
+    test.expect(awarded).toBe(undefined);
   });
 });
 
-describe('getBadgeNumber', () => {
+test.describe('getBadgeNumber', () => {
   const consoleLog = console.log;
-  beforeAll(async () => {
+  test.beforeAll(async () => {
     console.log = () => {};
   });
-  afterAll(async () => {
+  test.afterAll(async () => {
     console.log = consoleLog;
   });
 
@@ -33,12 +33,12 @@ describe('getBadgeNumber', () => {
     {url: 'https://superuser.com/', badge: 'fanatic', number: 42},
     {url: 'https://serverfault.com/', badge: 'fanatic', number: 67},
   ].forEach(({url, badge, number}) => {
-    it(`returns badge number ${number} for badge ${badge} on ${url}`, async ({
+    test(`returns badge number ${number} for badge ${badge} on ${url}`, async ({
       page,
     }) => {
       await page.goto(url);
       const badgeNumber = await getBadgeNumber(page, url, badge);
-      expect(badgeNumber).toBe(number);
+      test.expect(badgeNumber).toBe(number);
     });
   });
 });
