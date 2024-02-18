@@ -78,7 +78,8 @@ import {
       }
     }
   } catch (error) {
-    await page.screenshot({ path: 'error.png' });
+    console.error('Error:', error);
+    await page.screenshot({path: 'error.png'});
   } finally {
     await browser.close();
   }
