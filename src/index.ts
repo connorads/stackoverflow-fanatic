@@ -22,15 +22,15 @@ import {
   const browser = await playwright['chromium'].launch();
   const page = await browser.newPage();
 
-  const badgeNo = await getBadgeNumber(page, url);
-
   console.log(`Login to ${url}`);
   await page.goto(`${url}users/login`);
   console.log('url', page.url());
   await page.waitForSelector('#email');
   await page.fill('#email', email);
   await page.fill('#password', password);
-  await Promise.all([page.waitForURL('**/'), page.click('#submit-button')]);
+  await Promise.all([page.waitForURL(url), page.click('#submit-button')]);
+
+  const badgeNo = await getBadgeNumber(page, url);
 
   console.log('Go to profile');
   console.log('url', page.url());
