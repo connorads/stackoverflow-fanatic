@@ -26,6 +26,7 @@ jobs:
           STACKOVERFLOW_PASSWORD: ${{ secrets.STACKOVERFLOW_PASSWORD }}
           ALTERNATIVE_URL: ${{ secrets.ALTERNATIVE_URL }}
       - name: Upload screenshots
+        if: success() || failure()
         uses: actions/upload-artifact@v4
         with:
           name: screenshots
